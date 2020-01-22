@@ -1,2 +1,2 @@
-# p5.js-template
-p5.jsテンプレート
+# p5.js-pendulum
+p5.js 振り子
