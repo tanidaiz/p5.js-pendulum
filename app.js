@@ -5,9 +5,9 @@ const g = 1.0;
 //const m = 1.0;
 
 var omega = 0.0;
-var theta = Math.PI/6;
-var x_app = LENGTH * Math.sin(theta);
-var v_app = 0.0;
+var theta = Math.PI/2;
+var omega2 = omega;
+var theta2 = theta;
 
 var holding = false;
 
@@ -54,9 +54,9 @@ function draw(){
     circle(0,0,RADIUS);
     strokeWeight(WEIGHT);
 
-    //Exact
-    //mrw'' = -mg*sin(theta)
-    //w'' = -g/r*sin(theta)
+    // Exact
+    // mr(theta)'' = -mg*sin(theta)
+    // (theta)'' = -g*sin(theta)/r
 
     omega -= g/LENGTH * sin(theta);
     theta += omega;
@@ -67,16 +67,16 @@ function draw(){
     line(0,0,x,y);
     circle(x,y,RADIUS*2);
 
-    //Approximate
-    //mx'' = -mgx/r
-    //x'' = -gx/r
+    // Approximate
+    // (theta)'' = -g*theta/r
     
-    v_app += -g*x_app/LENGTH;
-    x_app += v_app;
-    if(x_app>LENGTH)x_app=LENGTH;
-    var y_app = Math.sqrt(1-x_app*x_app/LENGTH/LENGTH)*LENGTH;
+    omega2 -= g/LENGTH * theta2;
+    theta2 += omega2;
+    
+    var x2 = LENGTH*Math.sin(theta2);
+    var y2 = LENGTH*Math.cos(theta2);
 
     fill(255,0,0);
-    line(0,0,x_app,y_app);
-    circle(x_app,y_app,RADIUS*2);
+    line(0,0,x2,y2);
+    circle(x2,y2,RADIUS*2);
 }
